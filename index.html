@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrackRex | Shimpent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Sora:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-sA+4wZGSCSuGL4JZiPo9b7LQpJ7kBxKuX3+n1f0CjU8=" crossorigin="" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div class="brand">
+      <span class="parent">Shimpent</span>
+      <span class="product">TrackRex</span>
+    </div>
+    <nav class="main-nav">
+      <a href="#" class="nav-link active">Dashboard</a>
+      <a href="#" class="nav-link">Help</a>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <section class="controls-panel">
+      <div class="card add-package">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Add package</p>
+            <h2>Log a new TrackLine</h2>
+          </div>
+          <span class="badge">Live</span>
+        </div>
+        <form id="packageForm">
+          <label>
+            Tracking number
+            <input type="text" id="trackingNumber" class="mono" placeholder="1Z 999 999 99 9999" required />
+          </label>
+          <div class="field-group">
+            <label>
+              Carrier
+              <select id="carrier">
+                <option value="">Select carrier</option>
+                <option value="UPS">UPS</option>
+                <option value="USPS">USPS</option>
+                <option value="FedEx">FedEx</option>
+                <option value="DHL">DHL</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+            <button type="button" id="autoDetect" class="btn secondary">Auto detect</button>
+          </div>
+          <label>
+            Destination ZIP / City
+            <input list="cityOptions" type="text" id="destination" placeholder="94107 or Austin, TX" />
+          </label>
+          <datalist id="cityOptions">
+            <option value="San Francisco, CA">
+            <option value="New York, NY">
+            <option value="Austin, TX">
+            <option value="Chicago, IL">
+            <option value="Seattle, WA">
+            <option value="Los Angeles, CA">
+            <option value="Denver, CO">
+          </datalist>
+          <label>
+            Vanity name (optional)
+            <input type="text" id="vanityName" placeholder="e.g. Zephyr Amazon FBA Box" />
+          </label>
+          <div class="actions">
+            <button type="submit" class="btn primary">Add package</button>
+            <span class="error" id="formError"></span>
+          </div>
+        </form>
+      </div>
+
+      <div class="card package-list">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">In-flight</p>
+            <h2>Packages</h2>
+          </div>
+          <span id="packageCount" class="count">0</span>
+        </div>
+        <div id="packagesContainer" class="packages"></div>
+      </div>
+
+      <div id="packageDetails" class="card details hidden">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Selected</p>
+            <h2 id="detailTitle">Package details</h2>
+          </div>
+          <span id="detailStatus" class="status-chip">--</span>
+        </div>
+        <div class="details-body">
+          <p class="detail-line"><strong>Carrier:</strong> <span id="detailCarrier">--</span></p>
+          <p class="detail-line"><strong>Tracking ID:</strong> <span class="mono" id="detailTracking">--</span></p>
+          <p class="detail-line"><strong>Route:</strong> <span id="detailRoute">--</span></p>
+          <p class="detail-line"><strong>Status:</strong> <span id="detailStatusText">--</span></p>
+          <div id="helpCta" class="help-cta hidden">
+            <p>This package needs attention. Review FAQs or submit a help ticket to our claims desk.</p>
+            <div class="cta-actions">
+              <button class="btn secondary">View FAQs</button>
+              <button class="btn primary">Contact Pro</button>
+            </div>
+          </div>
+          <h3>Scan history</h3>
+          <ul id="scanList" class="scan-list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-panel">
+      <div id="map"></div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1j7kGStb6k9ZkH7E2z5YZo2wG3cM1xP4s3m0w3zY=" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
