@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrackRex | Shimpent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-sA+4J59sP4P4YfYjU5M47bGkNvztNFVQVH1uv0r2z8M=" crossorigin="" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top-bar">
+    <div class="brand-mark">
+      <span class="shimpent-label">Shimpent</span>
+      <span class="product-wordmark">TrackRex</span>
+    </div>
+    <nav class="top-nav">
+      <a href="#" class="nav-link active">Dashboard</a>
+      <a href="#" class="nav-link">Help</a>
+    </nav>
+  </header>
+
+  <main class="main-grid">
+    <section class="control-panel">
+      <div class="card add-package-card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Add package</p>
+            <h2>Track a shipment</h2>
+          </div>
+          <span class="helper-text">Mock data — API ready</span>
+        </div>
+        <form id="addPackageForm" class="form-grid">
+          <label class="form-field">
+            <span>Tracking number</span>
+            <input type="text" id="trackingNumber" placeholder="1Z999..." class="mono" required>
+          </label>
+          <div class="form-field grouped">
+            <label>
+              <span>Carrier</span>
+              <select id="carrier">
+                <option value="">Select carrier</option>
+                <option value="UPS">UPS</option>
+                <option value="USPS">USPS</option>
+                <option value="FedEx">FedEx</option>
+                <option value="DHL">DHL</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+            <button type="button" class="secondary" id="autoDetectBtn">Auto detect</button>
+          </div>
+          <label class="form-field">
+            <span>Destination ZIP / City</span>
+            <input type="text" id="destination" placeholder="97209 or Portland, OR">
+          </label>
+          <label class="form-field">
+            <span>Vanity name (optional)</span>
+            <input type="text" id="vanityName" placeholder="Atlassian F1 Pit Diorama">
+          </label>
+          <div class="form-actions">
+            <span class="error-text" id="formError"></span>
+            <button type="submit" class="primary">Add package</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card package-list-card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Active logistics</p>
+            <h2>Package list</h2>
+          </div>
+          <span class="helper-text">Select to inspect route</span>
+        </div>
+        <div id="packageList" class="package-list"></div>
+      </div>
+
+      <div class="card details-card hidden" id="detailsPanel">
+        <div class="details-head">
+          <div>
+            <p class="eyebrow">Package details</p>
+            <h3 id="detailsTitle">Select a package</h3>
+          </div>
+          <span id="detailsStatusChip" class="status-chip">Status</span>
+        </div>
+        <p class="details-meta" id="detailsMeta"></p>
+        <div class="cta-block hidden" id="alertCta">
+          <p>Need help pushing a carrier claim?</p>
+          <div class="cta-actions">
+            <button class="secondary ghost" id="faqBtn">View FAQs</button>
+            <button class="primary light" id="proBtn">Contact a claims pro</button>
+          </div>
+        </div>
+        <div>
+          <h4>Scan history</h4>
+          <ul id="scanList" class="scan-list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-panel">
+      <div id="map"></div>
+      <div class="map-legend">
+        <div><span class="legend-dot green"></span> On-time</div>
+        <div><span class="legend-dot yellow"></span> Monitor</div>
+        <div><span class="legend-dot red"></span> Exception</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-v9ZF0fbx3rt0bVQ7N37m5sXk3CVDs3Sk3f2m6m0pLFw=" crossorigin=""></script>
+  <script src="script.js"></script>
+</body>
+</html>
